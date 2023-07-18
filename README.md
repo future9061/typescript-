@@ -64,7 +64,7 @@
 
 ```
 
-1. App.tsx에서 사용할 data 만들기
+1. 사용할 data 만들기
 
 ```javascript
 
