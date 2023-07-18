@@ -53,20 +53,20 @@
 //directory 구조
 📦src
  ┣ 📂model
- ┃ ┗ 📜Cafe.ts data의 타입을 지정해주는 file
+ ┃ ┗ 📜Cafe.ts //data의 타입을 지정해주는 file
  ┣ 📜App.css
- ┣ 📜App.tsx  코드 작성
+ ┣ 📜App.tsx  //코드 작성
  ┣ 📜index.css
- ┣ 📜index.tsx  app을 rendering
+ ┣ 📜index.tsx  //app을 rendering
  ┣ 📜react-app-env.d.ts
  ┣ 📜reportWebVitals.ts
- ┗ 📜Store.tsx app에서 쓸 component
+ ┗ 📜Store.tsx //app에서 쓸 component
 
 ```
 
 1. App.tsx에서 사용할 data 만들기
 
-```
+```javascript
 
 let data = {
   name: "pnik dissert",
@@ -95,7 +95,7 @@ const App: React.FC = () => {
 
 2. App component 만들기
 
-```javascipt
+```javascript
 
 const App:React.FC = () => {
  return(
@@ -113,7 +113,7 @@ const App:React.FC = () => {
 
 2.가독성이 떨어짐
 
-```
+```javascript
 const Store:React.FC<storeProps> = ({info})  => {  }
 const Store = ({info}:storeProps) => {   }
 ```
@@ -122,7 +122,7 @@ const Store = ({info}:storeProps) => {   }
 
 3. data의 type을 지정해 줄 file 생성
 
-```javascipt
+```javascript
 //Cafe.ts
 //단순히 data만 들어있다면 굳이 .tsx로 만들필요 없음
 //object에 타입 설정은 interface or type
@@ -208,7 +208,7 @@ export default App;
 ```
 
 <details><summary>change   Address?</summary>
-address 값 변경 예정이여서 만든 함수  
+address 값 변경 예정이여서 만든 함수      
 address를 parameter로 받아와서  
 myCafe 객체의 address 속성을 업데이트
 
