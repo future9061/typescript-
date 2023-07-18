@@ -20,7 +20,7 @@
 
 **create-react-app 공식 사이트 참고**
 
-> npx create-react-app my-app --template typescript>
+> npx create-react-app my-app --template typescript
 
 <br />
 
