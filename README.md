@@ -20,7 +20,7 @@
 
 **create-react-app 공식 사이트 참고**
 
-> npx create-react-app my-app --template typescript
+> npx create-react-app my-app --template typescript>
 
 <br />
 
@@ -64,7 +64,7 @@
 
 ```
 
-1. 사용할 data 만들기
+1. App.tsx에서 사용할 data 만들기
 
 ```javascript
 
@@ -96,15 +96,11 @@ const App: React.FC = () => {
 2. App component 만들기
 
 ```javascript
-
-const App:React.FC = () => {
- return(
-   <div></div>
-  )
-}
+const App: React.FC = () => {
+  return <div></div>;
+};
 
 //const App:REACT.FC=()=>{} react에서 컴포넌트가 함수 타입임을 지정하는 것.
-
 ```
 
 <details><summary>REACT.FC<>가 최근 권장되지 않는 이유
@@ -114,8 +110,8 @@ const App:React.FC = () => {
 2.가독성이 떨어짐
 
 ```javascript
-const Store:React.FC<storeProps> = ({info})  => {  }
-const Store = ({info}:storeProps) => {   }
+const Store: React.FC<storeProps> = ({ info }) => {};
+const Store = ({ info }: storeProps) => {};
 ```
 
 </details>
@@ -127,24 +123,22 @@ const Store = ({info}:storeProps) => {   }
 //단순히 data만 들어있다면 굳이 .tsx로 만들필요 없음
 //object에 타입 설정은 interface or type
 
-
 export type Cafe = {
-   name: string;
-   category: string;
-   address: {
-     city: string;
-     detail: string;
-     zipCode: number;
-   };
-   menu: {
-     name: string;
-     price: number;
-     category: string;
-   }[];
- };
+  name: string,
+  category: string,
+  address: {
+    city: string,
+    detail: string,
+    zipCode: number,
+  },
+  menu: {
+    name: string,
+    price: number,
+    category: string,
+  }[],
+};
 
 //array는 뒤에 [] 명시
-
 ```
 
 위의 방식은 가독성이 떨어지고 data를 가져다 쓸 때에도 불편함이 있다.
@@ -249,3 +243,70 @@ changeAddress는 address의 값을 받아와서 객체의 상태를 업데이트
 만약 void를 생략한다면 changeAddress 함수는 any 타입이 되고, 값을 반환할 수 있다. changeAddress의 역할은 그저 내부 데이터 업데이트이기 때문에 void를 지정!
 
 </details>
+
+6. 컴포넌트에 Cafe.ts 데이터 타입 받아와서 응용하기
+
+```javascript
+//model direc > Cafe.ts
+export type Cafe = {
+  name:string;
+  category: string;
+  address: Address;
+  menu:Menu[]
+}
+
+export type Address = {
+  city: string;
+  detail: string;
+  zipCode:number
+}
+
+export type Menu = {
+  name:string;
+  price:number;
+  category:string
+}
+
+
+// BestMenu.tsx component
+
+//1.단순히 import해서 사용
+import { Menu } from './model/cafe'
+
+type BestProps {
+  data : Menu
+}
+
+const BestMenu = ({Menu}:BestProps)=>{
+  return(
+    <div>베스트 메뉴 : {Menu.name} ${Menu.price} category:{Menu.category}</div>
+  )
+}
+
+
+//2.기존 데이터에 객체 추가 해서 사용하기(extends)
+type BestProps extends{
+  data : Menu,
+  special : boolean  //데이터를 동적으로 관리
+}
+
+//3.기존 데이터에서 객체 하나 제외하기
+//Cafe.ts
+export type Menu = {
+  name:string;
+  price:number;
+  category?:string   //권장하지 않음
+}
+
+//type 에서만 omit 사용 가능. interface는 불가
+export type AddressWithoutZipcode = Omit<Menu,'category'>
+
+//BeatMenu.tsx
+type bestProps = Omit<Menu, 'category'> & {
+  special:boolean
+}
+interface bestProps extends Omit<Menu, 'category'> {
+  special:boolean
+}
+
+```
