@@ -1,6 +1,6 @@
 # 🧷 typescript
 
-##### typescript 기초를 정리하는 repository 😀
+##### typescript 간단한 예제를 해본 repository 😀
 
 <br />
 
